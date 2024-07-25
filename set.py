@@ -21,10 +21,10 @@ A set is created by using the set() function or placing the elements within a pa
 
 
 
-# A={10,20,30,40,70}
-# B={10,20,60,80,90}
-# print(A.difference(B))
-# print(B.difference(A))
+A={10,20,30,40,70}
+B={10,20,60,80,90}
+print(A.difference(B))
+print(B.difference(A))
 
 # chr
 
