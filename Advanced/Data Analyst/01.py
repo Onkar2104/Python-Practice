@@ -9,6 +9,6 @@ plt.scatter(x_axis, y_axis, color="red", marker="*", label="My Chart type")
 plt.xlabel("Single Point")
 plt.ylabel("New point")
 
-# plt.grid(True)
+plt.grid(True)
 plt.legend()
 plt.show()
