@@ -4,3 +4,6 @@
 from numpy import random
 x = random.choice([3, 5, 7, 0])
 print(x)
+
+y = random.choice(["a", "v", "j", "u"])
+print(y)
