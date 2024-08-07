@@ -18,3 +18,11 @@ print(df)
 
 df_add = df.apply(lambda x: x + 10 if x.name in ['b', 'f'] else x, axis=1)
 print(df_add)
+
+total_col1=df["col_1"].sum()
+total_col2=df["col_2"].sum()
+total_col3=df["col_3"].sum()
+
+print(f"Sum of col_1: {total_col1}")
+print(f"total of col_2: {total_col2}")
+print(f"total of col_3: {total_col3}")
