@@ -1,6 +1,27 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+import mysql.connector as db
 
 class Ui_Form(object):
+
+    def insert_data(self):
+        id_value = self.lineEdit.text()
+        name_value = self.lineEdit_2.text()
+        
+        try:
+            mydb = db.connect(host="localhost", user="root", password="", database="bitdb")
+            cursor = mydb.cursor()
+            query = "INSERT INTO pyqt (id, name) VALUES (%s, %s)"
+            values = (id_value, name_value)
+            cursor.execute(query, values)
+            mydb.commit()
+            cursor.close()
+            mydb.close()
+            QtWidgets.QMessageBox.information(None, "Success", "Data inserted successfully!")
+        except db.Error as e:
+            QtWidgets.QMessageBox.critical(None, "Error", f"Error inserting data: {e}")
+
+        
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(649, 609)
@@ -43,6 +64,8 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+
+        self.pushButton.clicked.connect(self.insert_data)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
