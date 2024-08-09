@@ -9,34 +9,67 @@ class Ui_bill(object):
         price = int(self.price_in.text())
         qty = int(self.qty_in.text())
         total = str(price * qty)
+        self.tot_in.setText(str(total))
+        all = f"Id:{id}, Product Name:{name}, Product Proce:{price}, Quantity{qty}"
+        self.all.setText(all)
 
         if(name=="" or price=="" or qty=="" ):
             QtWidgets.QMessageBox.information(None, "Alert", "Please Enter all Fields!")
         else:
-            mydb = db.connect(host="localhost", user="root", password="", database="bitdb")
-            cursor = mydb.cursor()
+            con = db.connect(host="localhost", user="root", password="", database="bitdb")
+            cursor = con.cursor()
             query = "INSERT INTO bill values('"+id+"','"+name+"','"+str(price)+"', '"+str(qty)+"', '"+str(total)+"')"
             cursor.execute(query)
             cursor.execute("commit")
 
-    def FetchData(self):
-        try:
-            mydb = db.connect(host="localhost", user="root", password="", database="bitdb")
-            cursor = mydb.cursor()
-            query = "SELECT * FROM bill"
-            cursor.execute(query)
-            results = cursor.fetchall()
-        
-            for row in results:
-                print(f"ID: {row[0]}, Name: {row[1]}, Price: {row[2]}, Quantity: {row[3]}, Total: {row[4]}")
-        
-                QtWidgets.QMessageBox.information(None, "Success", "Data fetched successfully!")
-        except db.Error as e:
-            QtWidgets.QMessageBox.information(None, "Error", f"Database error: {e}")
-        finally:
-            cursor.close()
-        mydb.close()
+    def Update(self):
+        Id = self.id_in.text()
+        Name = self.name_in.text()
+        Price = int(self.price_in.text())
+        Qty = int(self.qty_in.text())
+        Total = str(Price * Qty)
 
+        if(Id=="" or Name=="" or Price=="" or Qty=="" or Total==""):
+            QtWidgets.QMessageBox.warning("All fields are required..!")
+        else:
+                con = db.connect(host="localhost", user="root", password="", database="bitdb")
+                cursor = con.cursor()
+                cursor.execute("Update bill set name='"+Name+"', price='"+str(Price)+"', qty='"+str(Qty)+"', total='"+str(Total)+"'where id='"+Id+"'")
+                con.commit()
+                self.name_in.clear()
+                self.price_in.clear()
+                self.qty_in.clear()
+                QtWidgets.QMessageBox.information(None, "Success", "Details Updated..!")
+
+
+    def FetchData(self):
+        if(self.id.text()==""):
+            QtWidgets.QMessageBox.information(None, "Alert", "Please Enter all Fields!")
+        else:
+            con = db.connect(host="localhost", user="root", password="", database="bitdb")
+            cursor = con.cursor()
+            cursor.execute("select * from bill where id='"+self.id_in.text()+"'")
+            res = cursor.fetchall()
+
+            for row in res:
+                self.name_in.setText(row[1])
+                self.price_in.setText(str(row[2]))
+                self.qty_in.setSpecialValueText(str(row[3]))
+                self.total.setText(str(row[4]))
+
+            cursor.close()
+        con.close()
+
+    def Delete(self):
+        if(self.id.text()==""):
+            QtWidgets.QMessageBox.warning("Id is required")
+        else:
+            con = db.connect(host="localhost", user="root", password="", database="bitdb")
+            cursor = con.cursor()
+            cursor.execute("delete from bill where id='"+self.id_in.text()+"'")
+            con.commit()
+            QtWidgets.QMessageBox.information(None, "Success", "Deleted Successfully..!")
+            con.close()
 
 
     def setupUi(self, bill):
@@ -110,18 +143,18 @@ class Ui_bill(object):
         self.price_in = QtWidgets.QLineEdit(bill)
         self.price_in.setGeometry(QtCore.QRect(270, 220, 113, 22))
         self.price_in.setObjectName("price_in")
-        self.total = QtWidgets.QLineEdit(bill)
-        self.total.setGeometry(QtCore.QRect(270, 320, 113, 22))
-        self.total.setObjectName("total")
+        self.tot_in = QtWidgets.QLineEdit(bill)
+        self.tot_in.setGeometry(QtCore.QRect(270, 320, 113, 22))
+        self.tot_in.setObjectName("total")
         self.insert = QtWidgets.QPushButton(bill)
         self.insert.setGeometry(QtCore.QRect(590, 120, 93, 28))
         self.insert.setObjectName("insert")
         self.update = QtWidgets.QPushButton(bill)
         self.update.setGeometry(QtCore.QRect(590, 170, 93, 28))
         self.update.setObjectName("update")
-        self.delete_2 = QtWidgets.QPushButton(bill)
-        self.delete_2.setGeometry(QtCore.QRect(590, 220, 93, 28))
-        self.delete_2.setObjectName("delete_2")
+        self.delete = QtWidgets.QPushButton(bill)
+        self.delete.setGeometry(QtCore.QRect(590, 220, 93, 28))
+        self.delete.setObjectName("delete")
         self.select = QtWidgets.QPushButton(bill)
         self.select.setGeometry(QtCore.QRect(590, 270, 93, 28))
         self.select.setObjectName("select")
@@ -147,6 +180,8 @@ class Ui_bill(object):
         QtCore.QMetaObject.connectSlotsByName(bill)
         self.insert.clicked.connect(self.Insert)
         self.select.clicked.connect(self.FetchData)
+        self.update.clicked.connect(self.Update)
+        self.delete.clicked.connect(self.Delete)
 
     def retranslateUi(self, bill):
         _translate = QtCore.QCoreApplication.translate
@@ -158,7 +193,7 @@ class Ui_bill(object):
         self.tot.setText(_translate("bill", "Total"))
         self.insert.setText(_translate("bill", "Insert"))
         self.update.setText(_translate("bill", "Update"))
-        self.delete_2.setText(_translate("bill", "Delete"))
+        self.delete.setText(_translate("bill", "Delete"))
         self.select.setText(_translate("bill", "Select"))
         self.id.setText(_translate("bill", "id"))
 
