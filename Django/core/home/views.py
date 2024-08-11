@@ -14,9 +14,6 @@ def home(request):
     vegetables = ["tomato", "chilli", "potato"]
     return render(request, "home/index.html", context={'peoples' : peoples, 'vegetables':vegetables})
 
-# def about(request):
-    # return render(request, "index.html")
-    
 def about(request):
     return render(request, "home/about.html")
 
