@@ -20,6 +20,10 @@ from home.views import *
 
 urlpatterns = [
     path('', home, name="home"),
+    path('index/', index, name="index"),
+    path('contact/', contact, name="contact"),
+    path('about/', about, name="about"),
+    
     path('success-page/', success_page, name = "success_page"),
 
 
