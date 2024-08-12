@@ -12,13 +12,16 @@ def home(request):
         print(people)
 
     vegetables = ["tomato", "chilli", "potato"]
-    return render(request, "home/index.html", context={'peoples' : peoples, 'vegetables':vegetables})
+    # return render(request, "home/index.html", context={'peoples' : peoples, 'vegetables':vegetables})
+    return render(request, "home/index.html", context={'page':'Django', 'peoples':peoples})
 
 def about(request):
-    return render(request, "home/about.html")
+    context={'page':'About'}
+    return render(request, "home/about.html", context)
 
 def contact(request):
-    return render(request, "home/contact.html")
+    context={'page':'Contact'}
+    return render(request, "home/contact.html", context)
 
 def success_page(request):
     return HttpResponse("<h1>Be Successful.</h1>")
