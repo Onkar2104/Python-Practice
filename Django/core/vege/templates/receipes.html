@@ -20,7 +20,7 @@
         <button type="submit" class="btn btn-success">Add</button>
       </form>
 
-      <table class="table">
+      <table class="table col-6 mx-auto p-3 shadow-lg">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -35,7 +35,8 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{receipe.receipe_name}}</td>
             <td>{{receipe.receipe_description}}</td>
-            <td>{{receipe.receipe_image}}</td>
+            <td>
+              <img src="/media/{{receipe.receipe_image}}" style="height: 200px;"></td>
           </tr>
           {% endfor %}
         </tbody>
