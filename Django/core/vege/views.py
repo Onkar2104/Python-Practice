@@ -67,3 +67,6 @@ def login_page(request):
 
 def register(request):
     return render(request, 'register.html')
+
+def BookSec(request):
+    return render(request, 'BookSec.html')

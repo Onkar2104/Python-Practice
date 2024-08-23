@@ -32,6 +32,7 @@ urlpatterns = [
 
     path('login/', login_page, name="login_page"),
     path('register/', register, name="register"),
+     path('BookSec/', BookSec, name="BookSec"),
     
     path('success-page/', success_page, name = "success_page"),
 
