@@ -24,7 +24,7 @@ def receipes(request):
         return redirect('/receipes/')
     
     queryset = Receipe.objects.all()
-    
+
     if request.GET.get('search'):
         print(request.GET.get('search'))
         queryset = queryset.filter(receipe_name__icontains = request.GET.get('search'))
@@ -61,3 +61,9 @@ def update_receipe(request, id):
     context = {'receipe': queryset}
 
     return render(request, 'update_receipes.html', context)
+
+def login_page(request):
+    return render(request, 'login.html')
+
+def register(request):
+    return render(request, 'register.html')
