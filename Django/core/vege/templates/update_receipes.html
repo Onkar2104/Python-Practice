@@ -2,32 +2,25 @@
 {% block start %}
 
 <div class="container mt-5">
-    <h2 class="text-center">Add Receipe</h2>
+    <h2 class="text-center">Update Receipe</h2>
     <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
-          <input name="receipe_name" required type="text" class="form-control">
+          <input name="receipe_name" value="{{receipe.receipe_name}}" required type="text" class="form-control">
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" name="receipe_description" class="form-label">Receipe Description</label>
-          <textarea class="form-control" name="receipe_description" required></textarea>
+          <textarea class="form-control" name="receipe_description" required>{{receipe.receipe_description}}</textarea>
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Receipe Image</label>
             <input name="receipe_image" type="file" class="form-control">
           </div>
-        <button type="submit" class="btn btn-success">Add</button>
+        <button type="submit" class="btn btn-success">Update</button>
       </form>
 
-      <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input class="form-control" type="search" placeholder="Search Food" aria-label="Search" name="search">
-          <button class="btn btn-outline-success my-2" type="submit">Search</button>
-        </form>
-      </nav>
-
-      <table class="table col-6 mx-auto p-3 shadow-lg">
+      <!-- <table class="table col-6 mx-auto p-3 shadow-lg">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -46,13 +39,12 @@
             <td>
               <img src="/media/{{receipe.receipe_image}}" style="height: 100px;"></td>
             <td>
-              <a href="/delete_receipe/{{receipe.id}}/" class="btn btn-danger m-2">Delete</a>
-              <a href="/update_receipe/{{receipe.id}}/" class="btn btn-success">Update</a>
+              <a href="/delete_receipe/{{receipe.id}}/" class="btn btn-danger">Delete</a>
             </td>
           </tr>
           {% endfor %}
         </tbody>
-      </table>
+      </table> -->
 </div>
 
 
