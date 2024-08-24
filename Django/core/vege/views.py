@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -99,7 +101,14 @@ def register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         
+        
+    
         user = User.objects.filter(username = username)
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            messages.info(request, "Use some strong password..!")
+            return redirect('/register/')
 
         if user.exists():
             messages.info(request, "Username is not available..!")
