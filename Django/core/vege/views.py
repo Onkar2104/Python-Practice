@@ -128,7 +128,7 @@ def register(request):
 
         messages.info(request, "Account created successfully..!")
 
-        return redirect('/register/')
+        return redirect('/login/')
 
     return render(request, 'register.html')
 
@@ -149,6 +149,11 @@ def get_students(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'report/students.html', {'queryset' : page_obj})
+
+def see_marks(request, student_id):
+    queryset = SubjectMarks.objects.filter(student__student_id__student_id = student_id)
+
+    return render(request, 'report/see_marks.html', {'queryset' : queryset})
 
 def BookSec(request):
     return render(request, 'BookSec.html')
