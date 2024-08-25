@@ -129,5 +129,14 @@ def register(request):
 
     return render(request, 'register.html')
 
+def get_students(request):
+    queryset = Student.objects.all()
+
+    if request.GET.get('search'):
+        print(request.GET.get('search'))
+        queryset = queryset.filter(student_name__icontains = request.GET.get('search'))
+
+    return render(request, 'report/students.html', {'queryset' : queryset})
+
 def BookSec(request):
     return render(request, 'BookSec.html')
