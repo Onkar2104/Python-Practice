@@ -27,10 +27,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 SECRET_KEY = 'django-insecure-v_@whi-crs1oq9-@2e#_efa!dk_$5%mi)jd71otya@)3ge4yij'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
