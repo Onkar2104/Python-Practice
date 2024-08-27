@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
 
 # Create your models here.
 
@@ -39,7 +37,7 @@ class Student(models.Model):
         return self.student_name
     
     class Meta:
-        ordering = ['department', 'student_name']
+        ordering = ['student_name']
         verbose_name = "student"
 
 class Subject(models.Model):
