@@ -6,3 +6,5 @@ class person:
         print(name)
 p=person
 p.fun()
+
+#28aug
