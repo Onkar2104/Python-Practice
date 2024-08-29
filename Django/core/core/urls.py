@@ -24,6 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', home, name="home"),
+    path('send_email/', send_email, name='send_email'),
     path('receipes/', receipes, name="receipes"),
     path('delete_receipe/<id>/', delete_receipe, name="delete_receipe"),
     path('update_receipe/<id>/', update_receipe, name="update_receipe"),

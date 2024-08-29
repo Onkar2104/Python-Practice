@@ -1,5 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from .utils import send_email_to_client
+
+def send_email(request):
+    send_email_to_client()
+
+    return redirect('/')
+
 
 def home(request):
     # return HttpResponse("Hey I am a robot")
