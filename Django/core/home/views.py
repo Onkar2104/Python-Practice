@@ -1,8 +1,16 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .utils import send_email_to_client
+from .utils import send_email_to_client, send_email_with_attachment
+from django.conf import settings
 
 def send_email(request):
+    subject = "This email is from django server with attachments"
+    message = "Hey"
+    recipent_list = ["onkarijare2104@gmail.com"]
+    # file_path = f"{settings.BASE_DIR}/home/main.xlsx"
+    file_path = f"{settings.BASE_DIR}/jspm.jpg"
+
+    send_email_with_attachment(subject, message, recipent_list, file_path)
     send_email_to_client()
 
     return redirect('/')
