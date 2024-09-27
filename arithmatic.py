@@ -11,3 +11,4 @@ print("a/b=",a/b)
 #20 sep
 #22 sep
 #26 sep
+#27 sep - working on profile section
